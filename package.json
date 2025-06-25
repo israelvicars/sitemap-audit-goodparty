@@ -1,0 +1,19 @@
+{
+  "name": "url-auditor",
+  "version": "1.0.0",
+  "description": "Audits URLs from a CSV file to check for non-200 HTTP responses.",
+  "main": "index.js",
+  "scripts": {
+    "audit": "node auditSitemapURLs.js",
+    "grouping": "node processElectionGroupings.js",
+    "audit:all": "node automateAudits.js",
+    "audit:range": "node auditSitemapURLs.js"
+  },
+  "private": true,
+  "dependencies": {
+    "axios": "^1.7.2",
+    "csv-parser": "^3.2.0",
+    "csv-writer": "^1.6.0",
+    "p-limit": "^6.2.0"
+  }
+}
