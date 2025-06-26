@@ -11,7 +11,9 @@
     "audit:range": "node auditSitemapURLs.js",
     "validate:prod": "node validateSitemapFiles.js --recursive https://goodparty.org/sitemap.xml",
     "validate:states": "node validateSitemapFiles.js --problem-sitemaps https://goodparty.org",
-    "validate:pr": "node validateSitemapFiles.js --problem-sitemaps https://gp-ui-git-israel-web-4303web-4301sitemapxmlerrors-good-party.vercel.app"
+    "validate:pr": "node validateSitemapFiles.js --problem-sitemaps https://gp-ui-git-israel-web-4303web-4301sitemapxmlerrors-good-party.vercel.app",
+    "health": "node sitemapHealthCheck.js",
+    "health:pr": "node sitemapHealthCheck.js https://gp-ui-git-israel-web-4303web-4301sitemapxmlerrors-good-party.vercel.app"
   },
   "private": true,
   "dependencies": {

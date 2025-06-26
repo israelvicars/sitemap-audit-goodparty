@@ -40,6 +40,37 @@ This repository contains small Node.js utilities that crawl Good Party's sitemap
 3. During auditing, the script hits every URL in the specified range (with a configurable concurrency limit and timeout). Non-200 responses are collected and written to a per-range CSV under `csv_output/`.
 4. Once a row has both counts filled in, `automateAudits.js` will skip it on subsequent runs, allowing the process to be safely resumed.
 
+## XML Sitemap Validator
+
+Good Party's sitemaps can be validated end-to-end with `validateSitemapFiles.js` (see npm scripts below). The validator performs **strict, production-grade** checks on both individual sitemaps and sitemap indexes:
+
+- ✓ Valid XML structure (well-formed)  
+- ✓ Required XML namespace (`http://www.sitemaps.org/schemas/sitemap/0.9`)  
+- ✓ Presence of required `<loc>` elements  
+- ✓ Valid URL formats (`http` / `https`)  
+- ✓ Valid date formats (W3C DateTime)  
+- ✓ Valid `changefreq` values (`always`, `hourly`, `daily`, `weekly`, `monthly`, `yearly`, `never`)  
+- ✓ Valid `priority` values (`0.0 – 1.0`)  
+- ✓ File size limit ≤ **50 MB**  
+- ✓ URL count limit ≤ **50 000** per sitemap  
+- ✓ Duplicate URL detection  
+- ✓ Unescaped characters detection (`&`, `<`, `>`)
+
+### Useful commands
+
+| Script | What it does |
+|--------|--------------|
+| `npm run validate:prod` | Recursively validates the production site's `sitemap.xml` and every referenced child sitemap. |
+| `npm run validate:states` | Validates the "problem" state sitemaps (both `candidates` and `state`) on production. |
+| `npm run validate:pr` | Same as above but hits a preview deployment URL (helpful in CI/PR workflows). |
+| `npm run health` | Runs a lightweight health-check hitting only the most common sitemap endpoints. |
+
+You can also run the script directly:
+
+```bash
+node validateSitemapFiles.js --recursive https://example.com/sitemap.xml
+```
+
 ---
 
-Happy auditing! 🎉 
+Happy auditing & validating! 🎉 
